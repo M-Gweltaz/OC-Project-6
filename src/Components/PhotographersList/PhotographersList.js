@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import data from '../data/photographers.json';
+import data from '../../data/photographers.json';
 import PhotographersCards from './PhotographersCards';
-import '../styles/PhotographersList.css';
+import '../../styles/PhotographersList.css';
 
 export default function PhotographersList() {
 	// accessing the wanted data
