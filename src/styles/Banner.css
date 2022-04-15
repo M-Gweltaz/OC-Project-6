@@ -1,0 +1,16 @@
+.banner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.banner__logo {
+	padding: 1.5em;
+	margin-left: 3em;
+	width: 250px;
+}
+.banner__title {
+	color: #901c1c;
+	margin-right: 2.25em;
+	text-align: end;
+}

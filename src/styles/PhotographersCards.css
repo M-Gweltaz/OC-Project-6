@@ -1,0 +1,46 @@
+.photographerCard {
+	display: flex;
+	flex-direction: column;
+}
+
+.photographerCard__link {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.photographerCard__link--img {
+	object-fit: cover;
+	width: 12.5em;
+	height: 12.5em;
+	border-radius: 50%;
+	box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
+}
+
+.photographerCard__link--name {
+	color: #d3573c;
+	font-size: 2.25em;
+	text-align: center;
+	margin: 0.5em 0 0.2em 0;
+}
+
+.photographerCard__description {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.photographerCard__description--location {
+	color: #901c1c;
+	font-size: 0.8125em;
+}
+
+.photographerCard__description--tagline {
+	font-size: 0.625em;
+	margin: 0.5em 0;
+}
+
+.photographerCard__description--price {
+	font-size: 0.5625em;
+	color: #757575;
+}
