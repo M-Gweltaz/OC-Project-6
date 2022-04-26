@@ -1,24 +1,19 @@
 import '../../styles/PhotographersCards.css';
 import { Link } from 'react-router-dom';
+import PhotographerPortrait from '../PhotographerPortrait';
 
 export default function PhotographersCards({ photographerData }) {
 	const { name, portrait, city, country, tagline, price } = photographerData;
 
-	const picture = `assets/photographers/Photographers_ID_Photos/${portrait}`;
-
 	// creating a clean string to use as url params
-	const nameCleaned = name.replace(/\s/g, '');
+	const nameCleaned = name.replace(/\s/g, '_');
 	const profilLink = `profil/${nameCleaned}`;
 
 	return (
 		<figure className='photographerCard'>
 			<div>
 				<Link to={profilLink} className='photographerCard__link'>
-					<img
-						src={picture}
-						alt={`${name} portrait`}
-						className='photographerCard__link--img'
-					/>
+					<PhotographerPortrait name={name} portrait={portrait} />
 					<h2 className='photographerCard__link--name'>{name}</h2>
 				</Link>
 			</div>

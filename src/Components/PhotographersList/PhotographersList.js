@@ -1,21 +1,25 @@
-import { useState } from 'react';
-import data from '../../data/photographers.json';
 import PhotographersCards from './PhotographersCards';
-import '../../styles/PhotographersList.css';
 
-export default function PhotographersList() {
-	// accessing the wanted data
-	const { photographers } = data;
-	// transfering the data as a State
-	const [photographersDatas, setPhotographerList] = useState(photographers);
-
+export default function PhotographersList({ photographersDatas }) {
 	// looping through each data to render each PhotographersCards components
-	const test = photographersDatas.map((photographerData) => (
+	const photographersCardsArray = photographersDatas.map((photographerData) => (
 		<PhotographersCards
 			photographerData={photographerData}
 			key={photographerData.id}
 		/>
 	));
 
-	return <main className='photographersList'>{test}</main>;
+	return (
+		<main
+			style={{
+				display: 'grid',
+				gridTemplateColumns: 'repeat(3, 1fr)',
+				gridGap: '2em',
+				justifyItems: 'center',
+				margin: '2em',
+			}}
+		>
+			{photographersCardsArray}
+		</main>
+	);
 }

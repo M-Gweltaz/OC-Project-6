@@ -1,7 +1,0 @@
-.photographersList {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 2em;
-	justify-items: center;
-	margin: 2em;
-}
