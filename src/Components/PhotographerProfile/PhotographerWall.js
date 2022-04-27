@@ -5,16 +5,20 @@ export default function PhotographerWall({
 	name,
 	photographerMedia,
 	totalAmountOfLike,
+	setTotalAmountOfLike,
 }) {
 	// looping through all picture path to render each picture component
-	const wallMedias = photographerMedia.map((wallMedia, index) => (
+	const wallMedias = photographerMedia.map((wallMedia) => (
 		<PhotographerWallMedia
 			key={wallMedia.id}
 			name={name}
 			wallMedia={wallMedia}
 			totalAmountOfLike={totalAmountOfLike}
+			setTotalAmountOfLike={setTotalAmountOfLike}
 		/>
 	));
+
+	console.log(wallMedias);
 
 	return (
 		<section

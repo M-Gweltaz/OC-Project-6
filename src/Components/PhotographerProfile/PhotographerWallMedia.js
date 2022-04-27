@@ -7,7 +7,20 @@ export default function PhotographerWallMedia({
 	name,
 	wallMedia,
 	totalAmountOfLike,
+	setTotalAmountOfLike,
 }) {
+	// setting the all the likes states
+	const [isLiked, setIsLiked] = useState(false);
+	let tempIsLiked = isLiked;
+
+	const [likeLogoSrc, setLikeLogoSrc] = useState(blackLike);
+	let tempLikeLogoSrc = likeLogoSrc;
+
+	const [isTotalMediaLike, setIsTotalMediaLike] = useState(wallMedia.likes);
+	let tempMediaLike = isTotalMediaLike;
+
+	let tempTotalAmoutOfLike = totalAmountOfLike;
+
 	// setting src state
 	const [isPicture, setisPicture] = useState(true);
 	let tempIsPicture = isPicture;
@@ -29,6 +42,7 @@ export default function PhotographerWallMedia({
 	// requiring the media given the src type
 	let srcPath = require(`../../assets/photographers/${srcMediaPaths}`);
 
+	// rendering the correct html tag considering the media src
 	const mediaRender = (srcPath) => {
 		if (isPicture) {
 			return (
@@ -51,6 +65,25 @@ export default function PhotographerWallMedia({
 		}
 	};
 
+	// Media like logic
+	const handleLikeClick = () => {
+		if (tempIsLiked == true) {
+			tempTotalAmoutOfLike--;
+			tempIsLiked = false;
+			tempMediaLike--;
+			tempLikeLogoSrc = blackLike;
+		} else {
+			tempTotalAmoutOfLike++;
+			tempIsLiked = true;
+			tempMediaLike++;
+			tempLikeLogoSrc = redLike;
+		}
+		setIsLiked(tempIsLiked);
+		setIsTotalMediaLike(tempMediaLike);
+		setLikeLogoSrc(tempLikeLogoSrc);
+		setTotalAmountOfLike(tempTotalAmoutOfLike);
+	};
+
 	return (
 		<figure>
 			{mediaRender(srcPath)}
@@ -58,90 +91,11 @@ export default function PhotographerWallMedia({
 				<h2 className='photographerWall__description--title'>
 					{wallMedia.title}
 				</h2>
-				<div className='photographerWall__likes'>
-					<p className='photographerWall__likes--total'>{wallMedia.likes}</p>
-					<img src={blackLike} alt='likes' />
+				<div onClick={handleLikeClick} className='photographerWall__likes'>
+					<p className='photographerWall__likes--total'>{isTotalMediaLike}</p>
+					<img src={likeLogoSrc} alt='likes' />
 				</div>
 			</figcaption>
 		</figure>
 	);
 }
-
-// !!!! OLD WAY !!!!!
-
-// // setting src state
-// const [isPicture, setisPicture] = useState(true);
-// let tempIsPicture = isPicture;
-
-// // fake like number
-// const fakeLikeNumber = Math.floor(Math.random() * 100);
-
-// const minPicturesWallPaths = picturesWallPaths.replace(
-// 	/\.\.\/\.\.\/assets\/photographers\//g,
-// 	``
-// );
-
-// let picture = require(`../../assets/photographers/${minPicturesWallPaths}`);
-
-// const srcDescription = picturesWallPaths
-// 	.replace(/\.\.\/\.\.\/assets\/photographers\/.+\//g, ``)
-// 	.replace(/\..+/g, '')
-// 	.replace(/_/g, ' ');
-
-// const checkingFormat = (picture) => {
-// 	if (picture.includes('mp4')) {
-// 		tempIsPicture = false;
-// 	} else {
-// 		tempIsPicture = true;
-// 	}
-// };
-// checkingFormat(picture);
-
-// // updating the state
-// useEffect(() => setisPicture(tempIsPicture), []);
-
-// // rendering correct HTML tag considering the file src
-// const adaptedSrcTag = (src) => {
-// 	if (src) {
-// 		return (
-// 			<img
-// 				style={{ widht: '20vw' }}
-// 				className='photographerWall__picture'
-// 				src={picture}
-// 				alt={srcDescription}
-// 			/>
-// 		);
-// 	} else {
-// 		return (
-// 			<video
-// 				style={{ widht: '20vw' }}
-// 				className='photographerWall__picture'
-// 				src={picture}
-// 				controls
-// 			/>
-// 		);
-// 	}
-// };
-
-// return (
-// 	<figure>
-// 		{adaptedSrcTag(isPicture)}
-// 		<img
-// 			style={{ widht: '20vw' }}
-// 			className='photographerWall__picture'
-// 			src={picture}
-// 			alt={photographerMedia.alt}
-// 		/>
-// 		<figcaption className='photographerWall__description'>
-// 			<h2 className='photographerWall__description--title'>
-// 				{photographerMedia.title}
-// 			</h2>
-// 			<div className='photographerWall__likes'>
-// 				<p className='photographerWall__likes--total'>
-// 					{photographerMedia.likes}
-// 				</p>
-// 				<img src={blackLike} alt='likes' />
-// 			</div>
-// 		</figcaption>
-// 	</figure>
-// );

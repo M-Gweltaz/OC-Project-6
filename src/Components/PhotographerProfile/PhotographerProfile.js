@@ -52,6 +52,7 @@ export default function PhotographerProfile({
 				name={photographerProfilData.name}
 				photographerMedia={photographerMedia}
 				totalAmountOfLike={totalAmountOfLike}
+				setTotalAmountOfLike={setTotalAmountOfLike}
 			/>
 			<PricingAndLikes
 				price={photographerProfilData.price}
