@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 import PhotographerProfileCard from './PhotographerProfileCard';
-import PhotographerPhotoWall from './PhotographerPhotoWall';
+import PhotographerWall from './PhotographerWall';
 import PricingAndLikes from './PricingAndLikes';
 
-export default function PhotographerProfile({ photographersDatas }) {
+export default function PhotographerProfile({
+	photographersDatas,
+	mediasDatas,
+}) {
 	// Parsing through the url
 	const params = useParams();
 
@@ -17,13 +20,27 @@ export default function PhotographerProfile({ photographersDatas }) {
 	const [sortingPhotographerData] = photographersDatas.filter(
 		(photographer) => photographer.name == initialName
 	);
-
-	// creating a fake total like state variable
-	const [totalLike, setTotalLike] = useState(Math.floor(Math.random() * 10000));
-
-	// transfering the data as a State
+	// transfering the photographer data as a State
 	const [photographerProfilData, setPhotographerProfilData] = useState(
 		sortingPhotographerData
+	);
+
+	// accessing the specific photographers Media
+	const sortingPhotographerMedia = mediasDatas.filter(
+		(media) => sortingPhotographerData.id == media.photographerId
+	);
+	// transfering photographer specific media as a State
+	const [photographerMedia, setPhotographerMedia] = useState(
+		mediasDatas.filter(
+			(media) => sortingPhotographerData.id == media.photographerId
+		)
+	);
+
+	// accessing the photographer total amount of Like et setting it as a State
+	const [totalAmountOfLike, setTotalAmountOfLike] = useState(
+		photographerMedia.reduce((acc, curentLike) => {
+			return acc + curentLike.likes;
+		}, 0)
 	);
 
 	return (
@@ -31,13 +48,14 @@ export default function PhotographerProfile({ photographersDatas }) {
 			<PhotographerProfileCard
 				photographerProfilData={photographerProfilData}
 			/>
-			<PhotographerPhotoWall
+			<PhotographerWall
 				name={photographerProfilData.name}
-				totalLike={totalLike}
+				photographerMedia={photographerMedia}
+				totalAmountOfLike={totalAmountOfLike}
 			/>
 			<PricingAndLikes
 				price={photographerProfilData.price}
-				totalLike={totalLike}
+				totalAmountOfLike={totalAmountOfLike}
 			/>
 		</>
 	);

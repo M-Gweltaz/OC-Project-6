@@ -9,23 +9,14 @@ import '../styles/App.css';
 import Home from '../routes/Home';
 import Profile from '../routes/Profile';
 import BadRequest from '../routes/BadRequest';
-// class import
-import Photographer from '../Models/Photographer';
 
 export default function App() {
 	// accessing the data
-	const { photographers } = data;
-
-	console.log(data);
-
-	const test = photographers.map((photographer) => {
-		photographer = new Photographer();
-	});
-
-	console.log(test);
+	const { photographers, media } = data;
 
 	// transfering the data as a State
 	const [photographersDatas, setPhotographerList] = useState(photographers);
+	const [mediasDatas, setMediasDatas] = useState(media);
 
 	return (
 		<>
@@ -36,7 +27,12 @@ export default function App() {
 				/>
 				<Route
 					path='/profil/:id'
-					element={<Profile photographersDatas={photographersDatas} />}
+					element={
+						<Profile
+							photographersDatas={photographersDatas}
+							mediasDatas={mediasDatas}
+						/>
+					}
 				/>
 				<Route path='/*' element={<BadRequest />} />
 			</Routes>
