@@ -9,6 +9,7 @@ import '../styles/App.css';
 import Home from '../routes/Home';
 import Profile from '../routes/Profile';
 import BadRequest from '../routes/BadRequest';
+import MediaSlider from './PhotographerProfile/MediaSlider';
 
 export default function App() {
 	// accessing the data
@@ -34,6 +35,7 @@ export default function App() {
 						/>
 					}
 				/>
+				<Route path='/test' element={<MediaSlider />} />
 				<Route path='/*' element={<BadRequest />} />
 			</Routes>
 		</>

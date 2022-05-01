@@ -20,6 +20,11 @@
 .photographerWall__likes {
 	display: flex;
 }
+
+.photographerWall__likes--logo {
+	margin: auto;
+	font-size: 1.4em;
+}
 .photographerWall__likes--total {
 	font-weight: bold;
 	font-size: 1.5em;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import blackLike from '../../assets/icons/black_like.svg';
-import redLike from '../../assets/icons/red_like.svg';
+import { BsHeartFill, BsHeart } from 'react-icons/bs';
 import('../../styles/PhotographerWallMedia.css');
 
 export default function PhotographerWallMedia({
@@ -8,13 +7,15 @@ export default function PhotographerWallMedia({
 	wallMedia,
 	totalAmountOfLike,
 	setTotalAmountOfLike,
+	isSliderOpen,
+	setSliderOpen,
+	index,
+	currentSlide,
+	setCurrentSlide,
 }) {
 	// setting the all the likes states
 	const [isLiked, setIsLiked] = useState(false);
 	let tempIsLiked = isLiked;
-
-	const [likeLogoSrc, setLikeLogoSrc] = useState(blackLike);
-	let tempLikeLogoSrc = likeLogoSrc;
 
 	const [isTotalMediaLike, setIsTotalMediaLike] = useState(wallMedia.likes);
 	let tempMediaLike = isTotalMediaLike;
@@ -47,6 +48,8 @@ export default function PhotographerWallMedia({
 		if (isPicture) {
 			return (
 				<img
+					index={index}
+					onClick={handleSliderClick}
 					style={{ widht: '20vw' }}
 					className='photographerWall__picture'
 					src={srcPath}
@@ -56,6 +59,8 @@ export default function PhotographerWallMedia({
 		} else {
 			return (
 				<video
+					index={index}
+					onClick={handleSliderClick}
 					style={{ widht: '20vw' }}
 					className='photographerWall__picture'
 					src={srcPath}
@@ -71,17 +76,28 @@ export default function PhotographerWallMedia({
 			tempTotalAmoutOfLike--;
 			tempIsLiked = false;
 			tempMediaLike--;
-			tempLikeLogoSrc = blackLike;
 		} else {
 			tempTotalAmoutOfLike++;
 			tempIsLiked = true;
 			tempMediaLike++;
-			tempLikeLogoSrc = redLike;
 		}
 		setIsLiked(tempIsLiked);
 		setIsTotalMediaLike(tempMediaLike);
-		setLikeLogoSrc(tempLikeLogoSrc);
 		setTotalAmountOfLike(tempTotalAmoutOfLike);
+	};
+
+	// handling slider openning and closing
+	let tempsSliderOpen = isSliderOpen;
+
+	const handleSliderClick = (e) => {
+		tempsSliderOpen ? (tempsSliderOpen = false) : (tempsSliderOpen = true);
+
+		// getting the index from the event
+		let attributeValue = parseInt(e.target.getAttribute('index'));
+		//setting the clicked media index as currentSlide
+		setCurrentSlide(attributeValue);
+
+		setSliderOpen(tempsSliderOpen);
 	};
 
 	return (
@@ -93,7 +109,11 @@ export default function PhotographerWallMedia({
 				</h2>
 				<div onClick={handleLikeClick} className='photographerWall__likes'>
 					<p className='photographerWall__likes--total'>{isTotalMediaLike}</p>
-					<img src={likeLogoSrc} alt='likes' />
+					{isLiked ? (
+						<BsHeart className='photographerWall__likes--logo' />
+					) : (
+						<BsHeartFill className='photographerWall__likes--logo' />
+					)}
 				</div>
 			</figcaption>
 		</figure>

@@ -43,7 +43,24 @@ export default function PhotographerProfile({
 		}, 0)
 	);
 
-	return (
+	// checking if Slider is open
+	const [isSliderOpen, setSliderOpen] = useState(false);
+
+	// setting the correct currentSlide from the media clicked
+	const [currentSlide, setCurrentSlide] = useState();
+
+	return isSliderOpen ? (
+		<PhotographerWall
+			name={photographerProfilData.name}
+			photographerMedia={photographerMedia}
+			totalAmountOfLike={totalAmountOfLike}
+			setTotalAmountOfLike={setTotalAmountOfLike}
+			isSliderOpen={isSliderOpen}
+			setSliderOpen={setSliderOpen}
+			currentSlide={currentSlide}
+			setCurrentSlide={setCurrentSlide}
+		/>
+	) : (
 		<>
 			<PhotographerProfileCard
 				photographerProfilData={photographerProfilData}
@@ -53,6 +70,10 @@ export default function PhotographerProfile({
 				photographerMedia={photographerMedia}
 				totalAmountOfLike={totalAmountOfLike}
 				setTotalAmountOfLike={setTotalAmountOfLike}
+				isSliderOpen={isSliderOpen}
+				setSliderOpen={setSliderOpen}
+				currentSlide={currentSlide}
+				setCurrentSlide={setCurrentSlide}
 			/>
 			<PricingAndLikes
 				price={photographerProfilData.price}
