@@ -1,5 +1,5 @@
-import PhotographersCards from './PhotographersCards';
 import PhotographerFactory from '../../factories/PhotographerFactory';
+import('../../styles/PhotographersLists.css');
 
 export default function PhotographersList({ photographersDatas }) {
 	// looping through each data to render each PhotographersCards components
