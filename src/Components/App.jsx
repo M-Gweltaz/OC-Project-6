@@ -1,6 +1,6 @@
 // React import
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 // photographer Data
 import data from '../data/photographers.json';
 // Style reset import
@@ -8,7 +8,6 @@ import '../styles/App.css';
 // Routes import
 import Home from '../routes/Home';
 import Profile from '../routes/Profile';
-import BadRequest from '../routes/BadRequest';
 import MediaSlider from './PhotographerProfile/MediaSlider';
 
 export default function App() {
@@ -35,8 +34,7 @@ export default function App() {
 						/>
 					}
 				/>
-				<Route path='/test' element={<MediaSlider />} />
-				<Route path='/*' element={<BadRequest />} />
+				<Route path='/*' element={<Navigate replace to='/' />} />
 			</Routes>
 		</>
 	);
