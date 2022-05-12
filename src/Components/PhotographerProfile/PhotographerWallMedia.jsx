@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BsHeartFill, BsHeart } from 'react-icons/bs';
-import('../../styles/PhotographerWallMedia.css');
+import('../../styles/PhotographerProfileWall.css');
 
 export default function PhotographerWallMedia({
 	name,

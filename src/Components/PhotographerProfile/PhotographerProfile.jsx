@@ -20,6 +20,7 @@ export default function PhotographerProfile({
 	const [sortingPhotographerData] = photographersDatas.filter(
 		(photographer) => photographer.name == initialName
 	);
+
 	// transfering the photographer data as a State
 	const [photographerProfilData, setPhotographerProfilData] = useState(
 		sortingPhotographerData

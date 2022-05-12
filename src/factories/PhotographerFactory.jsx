@@ -1,13 +1,16 @@
-import Photographer from '../models/Photographer.jsx';
+// React import
 import { Link } from 'react-router-dom';
+
+// Models import
+import Photographer from '../models/Photographer.jsx';
 
 export default function PhotographerFactory({ photographerData }) {
 	// destructuring the data object
-
 	const { name, id, city, country, tagline, price, portrait } =
 		photographerData;
 
-	const photographerModels = new Photographer(
+	// Fitting our dat into our models
+	const photographerModel = new Photographer(
 		name,
 		id,
 		city,
@@ -18,19 +21,19 @@ export default function PhotographerFactory({ photographerData }) {
 	);
 
 	// Requiring the picture src path
-	let picture = photographerModels.getPicturePath();
+	let picture = photographerModel.getPicturePath();
 
 	// Sending back the output
 	return (
 		<figure className='photographerCard'>
 			<div>
 				<Link
-					to={photographerModels.getCleanUrlParams()}
+					to={photographerModel.getCleanUrlParams()}
 					className='photographerCard__link'
 				>
 					<img
 						src={picture}
-						alt={`${photographerModels.name}`}
+						alt={`${photographerModel.name}`}
 						style={{
 							objectFit: 'cover',
 							width: '12.5em',
@@ -40,19 +43,19 @@ export default function PhotographerFactory({ photographerData }) {
 						}}
 					/>
 					<h2 className='photographerCard__link--name'>
-						{photographerModels.name}
+						{photographerModel.name}
 					</h2>
 				</Link>
 			</div>
 			<figcaption className='photographerCard__description'>
 				<p className='photographerCard__description--location'>
-					{photographerModels.getLocation()}
+					{photographerModel.getLocation()}
 				</p>
 				<p className='photographerCard__description--tagline'>
-					{photographerModels.tagline}
+					{photographerModel.tagline}
 				</p>
 				<p className='photographerCard__description--price'>
-					{photographerModels.getDailyRate()}
+					{photographerModel.getDailyRate()}
 				</p>
 			</figcaption>
 		</figure>

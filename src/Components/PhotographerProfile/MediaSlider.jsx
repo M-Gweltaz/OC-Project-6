@@ -77,7 +77,6 @@ export default function MediaSlider({
 		return null;
 	}
 
-	console.log(currentSlide);
 	return (
 		<section className='slider'>
 			<BiChevronLeft onClick={prevSlide} className='slider__arrow--left' />
