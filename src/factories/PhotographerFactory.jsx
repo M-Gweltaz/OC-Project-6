@@ -26,10 +26,11 @@ export default function PhotographerFactory({ photographerData }) {
 	// Sending back the output
 	return (
 		<figure className='photographerCard'>
-			<div>
+			<div id={`${name}`}>
 				<Link
 					to={photographerModel.getCleanUrlParams()}
 					className='photographerCard__link'
+					aria-label={`${name} art navigation`}
 				>
 					<img
 						src={picture}
@@ -47,7 +48,10 @@ export default function PhotographerFactory({ photographerData }) {
 					</h2>
 				</Link>
 			</div>
-			<figcaption className='photographerCard__description'>
+			<figcaption
+				className='photographerCard__description'
+				aria-labelledby={`${name}`}
+			>
 				<p className='photographerCard__description--location'>
 					{photographerModel.getLocation()}
 				</p>

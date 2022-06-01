@@ -1,0 +1,102 @@
+.contactForm__Input input {
+	border-radius: 0.2em;
+	border: none;
+	height: 3em;
+	min-width: 35vw;
+}
+
+textarea {
+	border-radius: 0.2em;
+	border: none;
+	height: 6em;
+	min-width: 35vw;
+}
+
+label {
+	font-size: 2.25em;
+}
+
+small {
+	display: none;
+}
+
+.contactForm {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	top: 10vh;
+	left: 25%;
+	min-height: 80vh;
+	width: 40vw;
+	min-width: 15em;
+	padding: 2em;
+	background-color: #db8876;
+	border-radius: 0.5em;
+	box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+	z-index: 50;
+}
+
+.contactForm__Input {
+	margin-bottom: 0.25em;
+}
+.contactForm__close {
+	position: absolute;
+	right: 1%;
+	top: 0.1em;
+	font-size: 5em;
+	cursor: pointer;
+	z-index: 5;
+	color: white;
+}
+
+.contactForm__Negativespacing {
+	margin-bottom: -0.25em;
+}
+
+.contactForm__Title {
+	font-size: 4em;
+	margin: -0.5em 0 0.5em 0;
+}
+
+.contactForm__Btn {
+	cursor: pointer;
+	background-color: #901c1c;
+	color: white;
+	border: none;
+	border-radius: 0.5em;
+	padding: 1.125em 1.5em;
+	font-size: 1.125em;
+	font-weight: bold;
+}
+
+/* Form Validation error message styling */
+.contactForm__Message {
+	font-weight: bold;
+	font-size: 1.125em;
+	color: #901c1c;
+}
+
+/* input Styling on Failure */
+.inputFailed input {
+	border: 0.125rem solid #f00800;
+}
+
+.inputFailed textarea {
+	border: 0.125rem solid #f00800;
+}
+
+.inputFailed small {
+	display: block;
+	color: #f00800;
+}
+
+/* input Styling on Success */
+.inputSuccess input {
+	border: 0.125rem solid #88ff00;
+}
+
+.inputSuccess textarea {
+	border: 0.125rem solid #88ff00;
+}

@@ -10,6 +10,7 @@ import('../styles/PhotographerProfileWall.css');
 
 export default function MediaFactory({
 	index,
+	sortedBy,
 	media,
 	name,
 	totalMediaLikes,
@@ -60,8 +61,37 @@ export default function MediaFactory({
 		setTotalMediaLikes(tempMediaLikes);
 	};
 
-	// handle slider event
-	const handleSliderClick = (e) => {
+	const handleLikeKeyDown = (e) => {
+		// temp State var
+		let tempIsLiked = isLiked;
+		let tempMediaLikes = totalMediaLikes;
+
+		// updating temp State var
+		switch (true) {
+			case e.key == 'Escape' && tempIsLiked.like == true:
+				tempMediaLikes--;
+				tempIsLiked.like = false;
+				tempIsLiked.total--;
+				break;
+
+			case e.key == 'Enter' && tempIsLiked.like == false:
+				tempMediaLikes++;
+				tempIsLiked.like = true;
+				tempIsLiked.total++;
+				break;
+		}
+
+		// updating State with tempState changed value
+		setIsLiked({ like: tempIsLiked.like, total: tempIsLiked.total });
+		setTotalMediaLikes(tempMediaLikes);
+	};
+
+	// handle slider opening event
+	const sliderOpening = (e) => {
+		// Making the body aria-hidden
+		let mainWrapper = document.querySelector('#root');
+		mainWrapper.setAttribute('aria-hidden', 'true');
+
 		// temp State var
 		let tempsSliderOpen;
 
@@ -76,19 +106,59 @@ export default function MediaFactory({
 		setSliderOpen(tempsSliderOpen);
 	};
 
+	const handleSliderClick = (e) => {
+		sliderOpening(e);
+	};
+
+	const handleSliderKeyDown = (e) => {
+		if (e.key == 'Enter') {
+			sliderOpening(e);
+		}
+	};
+
 	return (
 		<figure>
-			{mediaModel.getMediaRender(srcPath, index, handleSliderClick)}
-			<figcaption className='photographerWall__description'>
+			{mediaModel.getMediaRender(
+				srcPath,
+				index,
+				handleSliderClick,
+				handleSliderKeyDown
+			)}
+			<figcaption
+				className='photographerWall__description'
+				aria-labelledby={`${title}`}
+			>
 				<h2 className='photographerWall__description--title'>
 					{mediaModel.title}
 				</h2>
-				<div onClick={handleLikeClick} className='photographerWall__likes'>
-					<p className='photographerWall__likes--total'>{isLiked.total}</p>
+				<div
+					onClick={handleLikeClick}
+					onKeyDown={handleLikeKeyDown}
+					className='photographerWall__likes'
+					tabIndex='0'
+				>
+					<p
+						id='nombre de like du media'
+						className='photographerWall__likes--total'
+					>
+						{isLiked.total}
+					</p>
 					{isLiked.like ? (
-						<BsHeart className='photographerWall__likes--logo' />
+						<BsHeart
+							className='photographerWall__likes--logo'
+							role='img'
+							aria-label="Coeur rempli : vous avez aimé l'image"
+							aria-checked='true'
+							aria-labelledby='nombre de like du media'
+						/>
 					) : (
-						<BsHeartFill className='photographerWall__likes--logo' />
+						<BsHeartFill
+							className='photographerWall__likes--logo'
+							role='img'
+							aria-label="Coeur vide : vous n'avez pas aimé l'image"
+							aria-checked='false'
+							aria-labelledby='nombre de like du media'
+						/>
 					)}
 				</div>
 			</figcaption>

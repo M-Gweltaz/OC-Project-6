@@ -2,13 +2,21 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
+// Component import
+import PhotographerProfileWall from './PhotographerProfileWall';
 import PhotographerProfileCard from './PhotographerProfileCard';
-import PhotographerWall from './PhotographerWall';
-import PricingAndLikes from './PricingAndLikes';
+import PricingAndLikes from './PricingAndLikesFooter';
+
+// Models import
+import Photographer from '../../models/Photographer';
 
 export default function PhotographerProfile({
 	photographersDatas,
 	mediasDatas,
+	isSliderOpen,
+	setSliderOpen,
+	isContactFormOpen,
+	setContactFormOpen,
 }) {
 	// Parsing through the url
 	const params = useParams();
@@ -17,68 +25,60 @@ export default function PhotographerProfile({
 	const initialName = params.id.replace(/_+/g, ' ');
 
 	// accessing the specific photographer Data
-	const [sortingPhotographerData] = photographersDatas.filter(
+	const [sortedPhotographerData] = photographersDatas.filter(
 		(photographer) => photographer.name == initialName
 	);
 
-	// transfering the photographer data as a State
-	const [photographerProfilData, setPhotographerProfilData] = useState(
-		sortingPhotographerData
+	// destructuring the data object
+	const { name, id, city, country, tagline, price, portrait } =
+		sortedPhotographerData;
+
+	// transfering the photographerData through our Model
+	const photographerModels = new Photographer(
+		name,
+		id,
+		city,
+		country,
+		tagline,
+		price,
+		portrait
 	);
 
-	// accessing the specific photographers Media
-	const sortingPhotographerMedia = mediasDatas.filter(
-		(media) => sortingPhotographerData.id == media.photographerId
-	);
-	// transfering photographer specific media as a State
-	const [photographerMedia, setPhotographerMedia] = useState(
-		mediasDatas.filter(
-			(media) => sortingPhotographerData.id == media.photographerId
-		)
+	// Filtering the photographer specific media
+	const photographerMedia = mediasDatas.filter(
+		(media) => sortedPhotographerData.id == media.photographerId
 	);
 
 	// accessing the photographer total amount of Like et setting it as a State
-	const [totalAmountOfLike, setTotalAmountOfLike] = useState(
+	const [totalMediaLikes, setTotalMediaLikes] = useState(
 		photographerMedia.reduce((acc, curentLike) => {
 			return acc + curentLike.likes;
 		}, 0)
 	);
 
-	// checking if Slider is open
-	const [isSliderOpen, setSliderOpen] = useState(false);
-
-	// setting the correct currentSlide from the media clicked
-	const [currentSlide, setCurrentSlide] = useState();
-
-	return isSliderOpen ? (
-		<PhotographerWall
-			name={photographerProfilData.name}
-			photographerMedia={photographerMedia}
-			totalAmountOfLike={totalAmountOfLike}
-			setTotalAmountOfLike={setTotalAmountOfLike}
-			isSliderOpen={isSliderOpen}
-			setSliderOpen={setSliderOpen}
-			currentSlide={currentSlide}
-			setCurrentSlide={setCurrentSlide}
-		/>
-	) : (
+	return (
 		<>
 			<PhotographerProfileCard
-				photographerProfilData={photographerProfilData}
+				photographerModels={photographerModels}
+				setContactFormOpen={setContactFormOpen}
+				isContactFormOpen={isContactFormOpen}
+				isSliderOpen={isSliderOpen}
 			/>
-			<PhotographerWall
-				name={photographerProfilData.name}
+			<PhotographerProfileWall
+				name={name}
 				photographerMedia={photographerMedia}
-				totalAmountOfLike={totalAmountOfLike}
-				setTotalAmountOfLike={setTotalAmountOfLike}
+				totalMediaLikes={totalMediaLikes}
+				setTotalMediaLikes={setTotalMediaLikes}
+				isContactFormOpen={isContactFormOpen}
+				setContactFormOpen={setContactFormOpen}
 				isSliderOpen={isSliderOpen}
 				setSliderOpen={setSliderOpen}
-				currentSlide={currentSlide}
-				setCurrentSlide={setCurrentSlide}
 			/>
 			<PricingAndLikes
-				price={photographerProfilData.price}
-				totalAmountOfLike={totalAmountOfLike}
+				price={photographerModels.getDailyRate()}
+				totalMediaLikes={totalMediaLikes}
+				isContactFormOpen={isContactFormOpen}
+				isSliderOpen={isSliderOpen}
 			/>
 		</>
 	);

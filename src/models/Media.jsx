@@ -15,18 +15,23 @@ export default class Media {
 		return asset;
 	}
 
-	getMediaRender(assetSrc, index, handleSliderClick) {
+	getMediaRender(assetSrc, index, handleSliderClick, handleSliderKeyDown) {
 		let mediaRender;
 		switch (true) {
 			case /\.(jpg|jpeg|png)/g.test(this.src):
 				mediaRender = (
 					<img
+						id={this.title}
 						index={index}
 						onClick={handleSliderClick}
+						onKeyDown={handleSliderKeyDown}
 						style={{ widht: '20vw' }}
 						className='photographerWall__picture'
 						src={assetSrc}
 						alt={this.title}
+						aria-haspopup='dialog'
+						aria-label='ouvrir la pop-up carouselle'
+						tabIndex='0'
 					/>
 				);
 				break;
@@ -34,12 +39,15 @@ export default class Media {
 			case /\.mp4/g.test(this.src):
 				mediaRender = (
 					<video
+						id={this.title}
 						index={index}
-						// onClick={handleSliderClick}
+						onClick={handleSliderClick}
 						style={{ widht: '20vw' }}
 						className='photographerWall__picture'
 						src={assetSrc}
 						controls
+						aria-haspopup='dialog'
+						aria-label='ouvrir la pop-up carouselle'
 					/>
 				);
 		}
@@ -52,7 +60,12 @@ export default class Media {
 			case /\.(jpg|jpeg|png)/g.test(this.src):
 				mediaRender = (
 					<>
-						<img className='slide__currentMedia' src={assetSrc} alt={title} />
+						<img
+							className='slide__currentMedia'
+							src={assetSrc}
+							alt={title}
+							tabIndex='0'
+						/>
 						<h2 className='slide__currentMedia--title'>{title}</h2>
 					</>
 				);

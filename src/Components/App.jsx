@@ -8,7 +8,6 @@ import '../styles/App.css';
 // Routes import
 import Home from '../routes/Home';
 import Profile from '../routes/Profile';
-import MediaSlider from './PhotographerProfile/MediaSlider';
 
 export default function App() {
 	// accessing the data
@@ -18,12 +17,24 @@ export default function App() {
 	const [photographersDatas, setPhotographerList] = useState(photographers);
 	const [mediasDatas, setMediasDatas] = useState(media);
 
+	// checking if contactForm is open
+	const [isContactFormOpen, setContactFormOpen] = useState(false);
+
+	// checking if Slider is open
+	const [isSliderOpen, setSliderOpen] = useState(false);
+
 	return (
 		<>
 			<Routes>
 				<Route
 					path='/'
-					element={<Home photographersDatas={photographersDatas} />}
+					element={
+						<Home
+							photographersDatas={photographersDatas}
+							isSliderOpen={isSliderOpen}
+							isContactFormOpen={isContactFormOpen}
+						/>
+					}
 				/>
 				<Route
 					path='/profil/:id'
@@ -31,6 +42,10 @@ export default function App() {
 						<Profile
 							photographersDatas={photographersDatas}
 							mediasDatas={mediasDatas}
+							isSliderOpen={isSliderOpen}
+							setSliderOpen={setSliderOpen}
+							isContactFormOpen={isContactFormOpen}
+							setContactFormOpen={setContactFormOpen}
 						/>
 					}
 				/>
