@@ -1,9 +1,6 @@
 // Component import
 import PhotographerPortrait from '../PhotographerPortrait';
 
-// Models import
-import Photographer from '../../models/Photographer';
-
 // Style import
 import '../../styles/PhotographerProfileCard.css';
 
@@ -25,7 +22,7 @@ export default function PhotographerProfileCard({
 	if (isContactFormOpen || isSliderOpen) {
 		return (
 			<section className='photographerProfileCard' style={{ opacity: 0.5 }}>
-				<header>
+				<header role='heading' aria-level='2'>
 					<h1 className='photographerInfos__name'>{photographerModels.name}</h1>
 					<p className='photographerInfos__location'>
 						{photographerModels.getLocation()}
@@ -53,7 +50,7 @@ export default function PhotographerProfileCard({
 	} else {
 		return (
 			<section className='photographerProfileCard'>
-				<header>
+				<header role='heading' aria-level='2'>
 					<h1 className='photographerInfos__name'>{photographerModels.name}</h1>
 					<p className='photographerInfos__location'>
 						{photographerModels.getLocation()}

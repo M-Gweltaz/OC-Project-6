@@ -26,18 +26,21 @@ export default function PhotographerProfileContact({
 	// handling form keyboard event
 	const handleContactFormKeyDown = (e) => {
 		switch (true) {
-			case e.key == 'Escape':
+			case e.key === 'Escape':
 				closingContactForm(e);
 				break;
 
-			case e.key == 'Enter' &&
+			case e.key === 'Enter' &&
 				e.target.classList.contains('contactForm__close'):
 				closingContactForm(e);
 				break;
 
-			case e.key == 'Tab':
+			case e.key === 'Tab':
 				trappingFocusInsideModal(e);
 				break;
+
+			default:
+				return;
 		}
 	};
 
@@ -81,7 +84,7 @@ export default function PhotographerProfileContact({
 		}
 
 		// removing failed aria attribut
-		if (input.getAttribute('aria-invalid') == 'true') {
+		if (input.getAttribute('aria-invalid') === 'true') {
 			input.removeAttribute('aria-invalid');
 		}
 

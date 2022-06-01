@@ -63,41 +63,45 @@ export default function SliderFactory({
 	// Slider keyboards logic handling
 	const handleSliderKeyDown = (e) => {
 		switch (true) {
-			case e.key == 'Escape':
+			case e.key === 'Escape':
 				closingSlider();
 				break;
 
-			case e.key == 'ArrowLeft':
+			case e.key === 'ArrowLeft':
 				setCurrentSlide(
 					currentSlide === 0 ? sliderMediaArray.length - 1 : currentSlide - 1
 				);
 				break;
 
-			case e.key == 'ArrowRight':
+			case e.key === 'ArrowRight':
 				setCurrentSlide(
 					currentSlide === sliderMediaArray.length - 1 ? 0 : currentSlide + 1
 				);
 				break;
 
-			case e.key == 'Enter' &&
+			case e.key === 'Enter' &&
 				e.target.classList.contains('slider__arrow--left'):
 				setCurrentSlide(
 					currentSlide === 0 ? sliderMediaArray.length - 1 : currentSlide - 1
 				);
 				break;
-			case e.key == 'Enter' &&
+			case e.key === 'Enter' &&
 				e.target.classList.contains('slider__arrow--right'):
 				setCurrentSlide(
 					currentSlide === sliderMediaArray.length - 1 ? 0 : currentSlide + 1
 				);
 				break;
 
-			case e.key == 'Enter' && e.target.classList.contains('slider__close'):
+			case e.key === 'Enter' && e.target.classList.contains('slider__close'):
 				closingSlider();
 				break;
 
-			case e.key == 'Tab':
+			case e.key === 'Tab':
 				trappingFocusInsideModal(e);
+				break;
+
+			default:
+				return;
 		}
 	};
 

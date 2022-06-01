@@ -26,7 +26,7 @@ export default function PhotographerProfile({
 
 	// accessing the specific photographer Data
 	const [sortedPhotographerData] = photographersDatas.filter(
-		(photographer) => photographer.name == initialName
+		(photographer) => photographer.name === initialName
 	);
 
 	// destructuring the data object
@@ -46,7 +46,7 @@ export default function PhotographerProfile({
 
 	// Filtering the photographer specific media
 	const photographerMedia = mediasDatas.filter(
-		(media) => sortedPhotographerData.id == media.photographerId
+		(media) => sortedPhotographerData.id === media.photographerId
 	);
 
 	// accessing the photographer total amount of Like et setting it as a State

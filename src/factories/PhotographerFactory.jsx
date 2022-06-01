@@ -26,32 +26,27 @@ export default function PhotographerFactory({ photographerData }) {
 	// Sending back the output
 	return (
 		<figure className='photographerCard'>
-			<div id={`${name}`}>
-				<Link
-					to={photographerModel.getCleanUrlParams()}
-					className='photographerCard__link'
-					aria-label={`${name} art navigation`}
-				>
-					<img
-						src={picture}
-						alt={`${photographerModel.name}`}
-						style={{
-							objectFit: 'cover',
-							width: '12.5em',
-							height: '12.5em',
-							borderRadius: '50%',
-							boxShadow: '10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff',
-						}}
-					/>
-					<h2 className='photographerCard__link--name'>
-						{photographerModel.name}
-					</h2>
-				</Link>
-			</div>
-			<figcaption
-				className='photographerCard__description'
-				aria-labelledby={`${name}`}
+			<Link
+				to={photographerModel.getCleanUrlParams()}
+				className='photographerCard__link'
+				aria-label={`${name} art navigation`}
 			>
+				<img
+					src={picture}
+					alt={`${photographerModel.name}`}
+					style={{
+						objectFit: 'cover',
+						width: '12.5em',
+						height: '12.5em',
+						borderRadius: '50%',
+						boxShadow: '10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff',
+					}}
+				/>
+				<h2 className='photographerCard__link--name'>
+					{photographerModel.name}
+				</h2>
+			</Link>
+			<figcaption className='photographerCard__description'>
 				<p className='photographerCard__description--location'>
 					{photographerModel.getLocation()}
 				</p>

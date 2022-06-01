@@ -46,7 +46,7 @@ export default function MediaFactory({
 		let tempMediaLikes = totalMediaLikes;
 
 		// updating temp State var
-		if (tempIsLiked.like == true) {
+		if (tempIsLiked.like === true) {
 			tempMediaLikes--;
 			tempIsLiked.like = false;
 			tempIsLiked.total--;
@@ -68,17 +68,26 @@ export default function MediaFactory({
 
 		// updating temp State var
 		switch (true) {
-			case e.key == 'Escape' && tempIsLiked.like == true:
+			case e.key === 'Escape' && tempIsLiked.like === true:
 				tempMediaLikes--;
 				tempIsLiked.like = false;
 				tempIsLiked.total--;
 				break;
 
-			case e.key == 'Enter' && tempIsLiked.like == false:
+			case e.key === 'Enter' && tempIsLiked.like === false:
 				tempMediaLikes++;
 				tempIsLiked.like = true;
 				tempIsLiked.total++;
 				break;
+
+			case e.key === 'Enter' && tempIsLiked.like === true:
+				tempMediaLikes--;
+				tempIsLiked.like = false;
+				tempIsLiked.total--;
+				break;
+
+			default:
+				return;
 		}
 
 		// updating State with tempState changed value
@@ -111,7 +120,7 @@ export default function MediaFactory({
 	};
 
 	const handleSliderKeyDown = (e) => {
-		if (e.key == 'Enter') {
+		if (e.key === 'Enter') {
 			sliderOpening(e);
 		}
 	};
@@ -136,28 +145,23 @@ export default function MediaFactory({
 					onKeyDown={handleLikeKeyDown}
 					className='photographerWall__likes'
 					tabIndex='0'
+					id={`Nombre de like de ${title}`}
+					role='button'
 				>
-					<p
-						id='nombre de like du media'
-						className='photographerWall__likes--total'
-					>
-						{isLiked.total}
-					</p>
+					<p className='photographerWall__likes--total'>{isLiked.total}</p>
 					{isLiked.like ? (
 						<BsHeart
 							className='photographerWall__likes--logo'
 							role='img'
 							aria-label="Coeur rempli : vous avez aimé l'image"
-							aria-checked='true'
-							aria-labelledby='nombre de like du media'
+							aria-labelledby={`Nombre de like de ${title}`}
 						/>
 					) : (
 						<BsHeartFill
 							className='photographerWall__likes--logo'
 							role='img'
 							aria-label="Coeur vide : vous n'avez pas aimé l'image"
-							aria-checked='false'
-							aria-labelledby='nombre de like du media'
+							aria-labelledby={`Nombre de like de ${title}`}
 						/>
 					)}
 				</div>

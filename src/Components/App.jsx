@@ -15,6 +15,7 @@ export default function App() {
 
 	// transfering the data as a State
 	const [photographersDatas, setPhotographerList] = useState(photographers);
+
 	const [mediasDatas, setMediasDatas] = useState(media);
 
 	// checking if contactForm is open

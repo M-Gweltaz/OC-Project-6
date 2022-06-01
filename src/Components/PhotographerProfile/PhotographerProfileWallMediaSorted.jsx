@@ -57,6 +57,9 @@ export default function PhotographerWallMediaSorted({
 					return 0;
 				});
 				break;
+
+			default:
+				return;
 		}
 
 		// merging the temps variable with the state
@@ -124,7 +127,7 @@ export default function PhotographerWallMediaSorted({
 					style={{
 						backgroundColor: '#901C1C',
 						color: 'white',
-						padding: '0.5em',
+						padding: '1em',
 						fontWeight: 'bold',
 						borderRadius: '0.5em',
 					}}

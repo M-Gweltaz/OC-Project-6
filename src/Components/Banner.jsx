@@ -11,7 +11,7 @@ export default function Banner({ isContactFormOpen, isSliderOpen }) {
 		// If we are at the homepage
 		case Object.keys(params).length === 0:
 			return (
-				<header className='banner' role='banner'>
+				<header className='banner' role='heading' aria-level='1'>
 					<nav>
 						<Link to='/' aria-label='homepage navigation'>
 							<img
@@ -24,12 +24,16 @@ export default function Banner({ isContactFormOpen, isSliderOpen }) {
 					<h1 className='banner__title'>Nos photographes</h1>
 				</header>
 			);
-			break;
 
 		// Setting bg if a modal is open
 		case isContactFormOpen || isSliderOpen:
 			return (
-				<header className='banner' role='banner' style={{ opacity: 0.5 }}>
+				<header
+					className='banner'
+					role='heading'
+					aria-level='1'
+					style={{ opacity: 0.5 }}
+				>
 					<nav>
 						<Link to='/' aria-label='homepage navigation'>
 							<img
@@ -41,7 +45,6 @@ export default function Banner({ isContactFormOpen, isSliderOpen }) {
 					</nav>
 				</header>
 			);
-			break;
 
 		// if we are at the profile page
 		default:

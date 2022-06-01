@@ -50,6 +50,10 @@ export default class Media {
 						aria-label='ouvrir la pop-up carouselle'
 					/>
 				);
+				break;
+
+			default:
+				return;
 		}
 		return mediaRender;
 	}
@@ -78,6 +82,10 @@ export default class Media {
 						<h2 className='slide__currentMedia--title'>{title}</h2>
 					</>
 				);
+				break;
+
+			default:
+				return;
 		}
 		return mediaRender;
 	}
